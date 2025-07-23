@@ -5,19 +5,16 @@ from datetime import datetime
 
 TASKS_FILE = "tasks.json"
 
-#Checks if json file exists, if it does, loads into f
 def load_tasks():
     if not os.path.exists(TASKS_FILE):
         return []
     with open(TASKS_FILE, "r") as f:
         return json.load(f)
 
-#Opens json in write then writes tasks list into it in json format
 def save_tasks(tasks):
     with open(TASKS_FILE, "w") as f:
         json.dump(tasks, f, indent=2)
 
-#
 def add_task(description):
     tasks = load_tasks()
     new_id = max([t["id"] for t in tasks], default=0) + 1
@@ -97,9 +94,6 @@ def mark_done(id):
     else:
         print(f"No task found with ID {id}.")
 
-
-
-
 def main():
     if len(sys.argv) < 2:
         print("Usage: task-cli <command> [arguments]")
@@ -142,8 +136,6 @@ def main():
             return
         id = sys.argv[2]
         mark_done(id)
-
-    # More commands will go here
 
 if __name__ == "__main__":
     main()
